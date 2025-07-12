@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState, useEffect } from 'react';
+import React from 'react'; // Removed useState, useEffect as they are no longer needed for typewriter overlay state
 import data from './data.jsx';
 import Hero from './components/Hero.jsx';
 import About from './components/About.jsx';
@@ -12,22 +12,11 @@ import Contact from './components/Contact.jsx';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import ThreeBackground from './components/ThreeBackground.jsx';
-import TypewriterEffect from './components/TypewriterEffect.jsx';
+import TypewriterEffect from './components/TypewriterEffect.jsx'; // Make sure this import is here
 
 function App() {
-  const [showTypewriterOverlay, setShowTypewriterOverlay] = useState(true);
-  const [fadingOut, setFadingOut] = useState(false);
-  const FADE_OUT_DURATION = 1000; // 1 second for the fade out animation
-
-  const handleTypewriterComplete = () => {
-    // Start the fade-out animation
-    setFadingOut(true);
-
-    // After the fade-out duration, unmount the typewriter overlay
-    setTimeout(() => {
-      setShowTypewriterOverlay(false);
-    }, FADE_OUT_DURATION);
-  };
+  // All state and functions related to the typewriter overlay are removed from App.js
+  // (e.g., showTypewriterOverlay, fadingOut, FADE_OUT_DURATION, handleTypewriterComplete)
 
   return (
     <div className="relative min-h-screen">
@@ -37,6 +26,7 @@ function App() {
       </div>
 
       {/* Main content wrapper, sits on top of the Three.js background */}
+      {/* This content is fully visible and rendered from the start */}
       <div className="relative z-10 bg-primary-dark bg-opacity-70 min-h-screen">
         <Navbar />
 
@@ -44,6 +34,17 @@ function App() {
           <section id="home" className="py-16 md:py-24">
             <Hero data={data} />
           </section>
+
+          {/* New Position for TypewriterEffect: Above the About Me section */}
+          {/* Wrapped in a div for consistent section padding and centering */}
+          <div className="py-16 md:py-24 flex justify-center items-center">
+            <TypewriterEffect
+              text="Welcome to My Portfolio.....Made with ❤️ by P.Vidya Praveen"
+              delay={100}      // Speed of typing each character
+              loop={true}      // This will make the effect loop indefinitely
+              loopDelay={3000} // Pause for 3 seconds after typing finishes before re-starting
+            />
+          </div>
 
           <section id="about" className="py-16 md:py-24">
             <About data={data} />
@@ -77,19 +78,7 @@ function App() {
         <Footer data={data} />
       </div>
 
-      {/* Typewriter Overlay: Now 'fixed' to the viewport */}
-      {showTypewriterOverlay && (
-        <div
-          // Changed 'absolute' to 'fixed' and increased z-index for assured top layer
-          className={`fixed inset-0 z-50 flex items-center justify-center bg-primary-dark bg-opacity-90 transition-opacity duration-1000 ${fadingOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
-        >
-          <TypewriterEffect
-            text="Welcome to My Portfolio.....Made with ❤️ by P.Vidya Praveen"
-            delay={150}
-            onComplete={handleTypewriterComplete}
-          />
-        </div>
-      )}
+      {/* The fixed typewriter overlay div is completely removed from here */}
     </div>
   );
 }

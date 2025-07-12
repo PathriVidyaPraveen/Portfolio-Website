@@ -6,19 +6,16 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // Your Custom Colors
       colors: {
-        'primary-dark': '#000000',    // Changed to true black
-        'component-bg': '#0a0a0a',    // A very dark grey, almost black, for component cards
-        'secondary-light': '#cbd5e0', // Light text color (can also be white if preferred)
-        'accent-blue': '#3b82f6',     // Your accent color
+        'primary-dark': '#000000',
+        'component-bg': '#0a0a0a',
+        'secondary-light': '#cbd5e0',
+        'accent-blue': '#3b82f6',
       },
-      // Your Custom Font Families
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        mono: ['Fira Code', 'monospace'],
+        mono: ['Fira Code', 'monospace'], // Make sure Fira Code is here if you use it!
       },
-      // New Keyframes and Animation for the Typewriter Cursor
       keyframes: {
         blink: {
           '0%, 100%': { opacity: '1' },

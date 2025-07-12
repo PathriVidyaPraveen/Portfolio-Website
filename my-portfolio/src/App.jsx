@@ -1,5 +1,5 @@
 // src/App.js
-import React from 'react'; // Removed useState, useEffect as they are no longer needed for typewriter overlay state
+import React, { useState, useEffect } from 'react'; // Re-introduce useState and useEffect for overlay logic
 import data from './data.jsx';
 import Hero from './components/Hero.jsx';
 import About from './components/About.jsx';
@@ -12,11 +12,16 @@ import Contact from './components/Contact.jsx';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import ThreeBackground from './components/ThreeBackground.jsx';
-import TypewriterEffect from './components/TypewriterEffect.jsx'; // Make sure this import is here
+import CatIntro from './components/CatIntro.jsx'; // Import the new CatIntro component
 
 function App() {
-  // All state and functions related to the typewriter overlay are removed from App.js
-  // (e.g., showTypewriterOverlay, fadingOut, FADE_OUT_DURATION, handleTypewriterComplete)
+  // State to control the visibility of the CatIntro overlay
+  const [showCatIntro, setShowCatIntro] = useState(true);
+
+  // Callback function that CatIntro calls when its animation is complete
+  const handleCatIntroComplete = () => {
+    setShowCatIntro(false); // Hide and unmount the CatIntro component
+  };
 
   return (
     <div className="relative min-h-screen">
@@ -25,8 +30,8 @@ function App() {
         <ThreeBackground />
       </div>
 
-      {/* Main content wrapper, sits on top of the Three.js background */}
-      {/* This content is fully visible and rendered from the start */}
+      {/* Main content wrapper - Your portfolio content */}
+      {/* This will be hidden by CatIntro initially, then become visible */}
       <div className="relative z-10 min-h-screen">
         <Navbar />
 
@@ -35,16 +40,8 @@ function App() {
             <Hero data={data} />
           </section>
 
-          {/* New Position for TypewriterEffect: Above the About Me section */}
-          {/* Wrapped in a div for consistent section padding and centering */}
-          <div className="py-16 md:py-24 flex justify-center items-center">
-            <TypewriterEffect
-              text="Welcome to My Portfolio.....Made with ❤️ by P.Vidya Praveen"
-              delay={100}      // Speed of typing each character
-              loop={true}      // This will make the effect loop indefinitely
-              loopDelay={3000} // Pause for 3 seconds after typing finishes before re-starting
-            />
-          </div>
+          {/* IMPORTANT: Remove the old looping TypewriterEffect from here */}
+          {/* It is now exclusively managed inside the CatIntro component */}
 
           <section id="about" className="py-16 md:py-24">
             <About data={data} />
@@ -78,7 +75,9 @@ function App() {
         <Footer data={data} />
       </div>
 
-      {/* The fixed typewriter overlay div is completely removed from here */}
+      {/* Cat Intro Overlay: This renders on top of everything else initially */}
+      {/* It will automatically fade out and unmount itself via the onComplete prop */}
+      {showCatIntro && <CatIntro onComplete={handleCatIntroComplete} />}
     </div>
   );
 }

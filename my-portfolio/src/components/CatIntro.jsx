@@ -1,7 +1,7 @@
 // src/components/CatIntro.jsx
 import React, { useRef, useState, useEffect, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { useGLTF, Html, OrbitControls } from '@react-three/drei';
+import { useGLTF, Html, OrbitControls } from '@react-three/drei'; // OrbitControls is useful for debugging
 import TypewriterEffect from './TypewriterEffect'; // Reusing your existing typewriter effect
 
 // Helper component to load and display the Cat Model
@@ -26,8 +26,6 @@ function CatModel({ modelPath, position, scale, rotation, initialDelay }) {
       // Scale up from almost nothing for an 'appearing' effect
       scale={visible ? scale : [0.01, 0.01, 0.01]}
       rotation={rotation}
-      // Note: CSS transitions applied directly to <primitive> usually don't work for 3D scaling.
-      // Scaling is handled by React state updates here.
     />
   );
 }
@@ -87,18 +85,20 @@ const CatIntro = ({ onComplete }) => {
         <Suspense fallback={null}> {/* Shows nothing (or a loader) while model loads */}
           <CatModel
             modelPath="/models/cat.glb" // *** IMPORTANT: Make sure this path matches your file! ***
-            position={[0, -1.5, 0]} // Adjust: X, Y, Z coordinates for your cat (Y is height)
-            scale={[2, 2, 2]}      // Adjust: Size of your cat [X, Y, Z]
-            rotation={[0, Math.PI / 8, 0]} // Optional: Rotate cat slightly (e.g., yaw)
+            // --- ADJUSTED VALUES HERE FOR SMALLER CAT AND BETTER INITIAL POSITION ---
+            position={[0, -0.8, 0]} // X: horizontal, Y: vertical, Z: depth. -0.8 Y often puts base of cat near screen bottom.
+            scale={[0.7, 0.7, 0.7]} // Adjusted scale: Start smaller. If still too big, try 0.5. If too small, increase.
+            rotation={[0, Math.PI / 8, 0]} // Optional: slight rotation
             initialDelay={500} // Delay before the cat starts scaling up
           />
 
           {showSpeechBubble && (
             <Html
-              position={[0.8, 0.5, 0]} // Adjust this to make the bubble appear from the cat's mouth in 3D
+              // --- ADJUSTED VALUES HERE FOR BETTER BUBBLE POSITION AND SIZE ---
+              position={[0.5, 1.0, 0]} // X: horizontal relative to cat, Y: vertical. Increased Y from 0.5 to 1.0.
               transform             // Enables CSS transforms on the HTML element
               sprite                // Makes the HTML always face the camera
-              distanceFactor={10}   // Controls how much the HTML scales with camera distance (adjust as needed)
+              distanceFactor={3}   // Adjusted distanceFactor: Reduced from 5 to 3. Smaller value makes HTML content appear smaller.
             >
               {/* This is your actual speech bubble HTML structure */}
               <div className="speech-bubble-wrapper p-4 max-w-[280px] md:max-w-sm lg:max-w-md">
@@ -117,23 +117,31 @@ const CatIntro = ({ onComplete }) => {
           )}
         </Suspense>
 
-        {/* OrbitControls for Debugging (Uncomment to use in development) */}
-        {/* Allows you to drag the scene with your mouse to find ideal cat position/camera angle */}
-        {/* <OrbitControls /> */}
+        {/* OrbitControls for Debugging (Uncomment in development) */}
+        {/* IMPORTANT: Uncomment the line below during development. */}
+        {/* It allows you to drag the scene with your mouse to find ideal cat and bubble positions. */}
+        {/* Remember to comment it out before deploying your website! */}
+        <OrbitControls />
       </Canvas>
 
       {/* Inline CSS for the speech bubble and its pointer */}
       <style jsx>{`
         .speech-bubble-wrapper {
-          /* Adjust to position the bubble correctly relative to its HTML position target */
+          /* This transform places the top-center of the bubble at the Html component's position.
+             It's a standard way to position speech bubbles. */
           transform: translate(-50%, -100%);
         }
         .speech-bubble {
-          white-space: nowrap; /* Prevents text from wrapping within the bubble */
+          /* Removing 'white-space: nowrap;' allows text to wrap, preventing horizontal overflow and clipping */
+          /* If you still want it on a single line, ensure the bubble is wide enough OR reduce font size. */
+          /* white-space: nowrap; // Uncomment this line if you specifically want no text wrapping */
           font-weight: bold;
           font-family: 'Fira Code', monospace; /* Using your defined monospace font */
-          min-width: fit-content; /* Bubble size fits content */
+          min-width: fit-content; /* Bubble size fits content initially */
           display: inline-block; /* Helps with fitting content */
+          
+          /* If text is still clipped vertically, try reducing font size here */
+          /* font-size: 1.1rem; // Example */
         }
         .speech-bubble-pointer {
           bottom: -12px; /* Position the pointer just below the main bubble */

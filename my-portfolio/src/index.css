@@ -1,0 +1,61 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar for better aesthetics */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000; /* Now true black */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b82f6; /* Matches accent-blue */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+/* Ensure HTML and Body take full height/width for positioning, but ALLOW overflow for content */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  /* REMOVED: overflow: hidden; */ /* This was preventing scrolling */
+  background-color: #000; /* Match canvas background for seamlessness */
+}
+
+/* Make the div containing your ThreeBackground component take full size
+   and position it absolutely behind everything else.
+   Crucially, it is NOT affected by scrolling of other content. */
+.full-screen-background-container { /* RENAMED for clarity */
+  position: fixed; /* Changed from absolute to fixed so it stays in viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Place it behind all other content */
+  /* Ensure it fills the entire viewport and doesn't scroll with content */
+  pointer-events: none; /* Allows clicks/hovers to pass through to content below, if desired */
+}
+
+/* The Canvas element itself will naturally fill its parent */
+canvas {
+  display: block; /* Remove any default inline margins/paddings */
+}
+
+/* Add a class for your scrollable content */
+.scrollable-content {
+  position: relative; /* So z-index works against the background */
+  z-index: 0; /* Ensures it's above the background */
+  width: 100%;
+  min-height: 100vh; /* Ensure it takes at least full viewport height */
+  /* Add padding or margins to ensure content isn't under fixed header/footer */
+  /* background-color: rgba(0,0,0,0.5); // Example if you want a slight overlay */
+}

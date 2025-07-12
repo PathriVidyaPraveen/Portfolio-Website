@@ -12,7 +12,7 @@ const Hero = ({ data }) => {
             src={'/linkedin_profile_pic.jpg'} // Your image path
             alt={data.name}
             // Changed from rounded-full to rounded-lg, adjusted width/height slightly for rectangle
-            className="w-40 h-40 md:w-48 md:h-64 object-cover border-4 border-accent-blue shadow-lg rounded-lg flex-shrink-0" // Removed rounded-full, added flex-shrink-0
+            className="w-40 h-40 md:w-64 md:h-48 object-cover border-4 border-accent-blue shadow-lg rounded-lg flex-shrink-0" // Removed rounded-full, added flex-shrink-0
           />
         )}
 

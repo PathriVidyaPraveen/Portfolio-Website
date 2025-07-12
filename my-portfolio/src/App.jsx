@@ -85,7 +85,7 @@ function App() {
         >
           <TypewriterEffect
             text="Welcome to My Portfolio.....Made with ❤️ by P.Vidya Praveen"
-            delay={300}
+            delay={150}
             onComplete={handleTypewriterComplete}
           />
         </div>

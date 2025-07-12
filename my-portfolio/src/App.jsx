@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState, useEffect } from 'react'; // Re-introduce useState and useEffect for overlay logic
+import React from 'react'; // No useState, useEffect needed for this structure anymore
 import data from './data.jsx';
 import Hero from './components/Hero.jsx';
 import About from './components/About.jsx';
@@ -12,17 +12,9 @@ import Contact from './components/Contact.jsx';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import ThreeBackground from './components/ThreeBackground.jsx';
-import CatIntro from './components/CatIntro.jsx'; // Import the new CatIntro component
+import TypewriterEffect from './components/TypewriterEffect.jsx'; // Make sure this import is here
 
 function App() {
-  // State to control the visibility of the CatIntro overlay
-  const [showCatIntro, setShowCatIntro] = useState(true);
-
-  // Callback function that CatIntro calls when its animation is complete
-  const handleCatIntroComplete = () => {
-    setShowCatIntro(false); // Hide and unmount the CatIntro component
-  };
-
   return (
     <div className="relative min-h-screen">
       {/* Fixed Three.js Background covering the entire page, below all content */}
@@ -30,9 +22,9 @@ function App() {
         <ThreeBackground />
       </div>
 
-      {/* Main content wrapper - Your portfolio content */}
-      {/* This will be hidden by CatIntro initially, then become visible */}
-      <div className="relative z-10 min-h-screen">
+      {/* Main content wrapper: REMOVED GLOBAL BACKGROUND OVERLAY */}
+      {/* It now only manages z-index and min-height, allowing Three.js background to show through */}
+      <div className="relative z-10 min-h-screen"> 
         <Navbar />
 
         <main className="container mx-auto px-4 py-8">
@@ -40,8 +32,15 @@ function App() {
             <Hero data={data} />
           </section>
 
-          {/* IMPORTANT: Remove the old looping TypewriterEffect from here */}
-          {/* It is now exclusively managed inside the CatIntro component */}
+          {/* TypewriterEffect remains in its section */}
+          <div className="py-16 md:py-24 flex justify-center items-center">
+            <TypewriterEffect
+              text="Welcome to My Portfolio.....Made with ❤️ by P.Vidya Praveen"
+              delay={100}
+              loop={true}
+              loopDelay={3000}
+            />
+          </div>
 
           <section id="about" className="py-16 md:py-24">
             <About data={data} />
@@ -74,10 +73,6 @@ function App() {
 
         <Footer data={data} />
       </div>
-
-      {/* Cat Intro Overlay: This renders on top of everything else initially */}
-      {/* It will automatically fade out and unmount itself via the onComplete prop */}
-      {showCatIntro && <CatIntro onComplete={handleCatIntroComplete} />}
     </div>
   );
 }

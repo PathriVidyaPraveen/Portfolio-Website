@@ -14,7 +14,7 @@ const Hero = ({ data }) => {
             // If your photo is in 'public/my_photo.jpg', then data.photoPlaceholder should be '/my_photo.jpg'
             src={'/linkedin_profile_pic.jpg'}
             alt={data.name}
-            className="w-32 h-32 md:w-40 md:h-40 rounded-full mx-auto mb-6 object-cover border-4 border-accent-blue shadow-lg"
+            className="w-32 h-32 md:w-40 md:h-40 rounded-lg mx-auto mb-6 object-cover border-4 border-accent-blue shadow-lg"
           />
         )}
         <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4">

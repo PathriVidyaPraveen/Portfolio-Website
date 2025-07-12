@@ -84,8 +84,8 @@ function App() {
           className={`fixed inset-0 z-50 flex items-center justify-center bg-primary-dark bg-opacity-90 transition-opacity duration-1000 ${fadingOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
         >
           <TypewriterEffect
-            text="Welcome to My Portfolio"
-            delay={100}
+            text="Welcome to My Portfolio.....Made with ❤️ by P.Vidya Praveen"
+            delay={300}
             onComplete={handleTypewriterComplete}
           />
         </div>

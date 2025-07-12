@@ -296,13 +296,13 @@ const data = {
       name: "JEE Advanced 2024",
       score: "240 / 360",
       date: "May 2024",
-      rank: "AIR 842 (General), AIR 123 (OBC-NCL)"
+      rank: "AIR 842"
     },
     {
       name: "JEE Mains 2024",
       score: "295 / 300",
       date: "Apr 2024",
-      rank: "AIR 84 (General), AIR 14 (OBC-NCL)"
+      rank: "AIR 84"
     }
   ],
 

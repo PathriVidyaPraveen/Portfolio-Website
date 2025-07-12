@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState, useEffect } from 'react'; // Import useState and useEffect
+import React, { useState, useEffect } from 'react';
 import data from './data.jsx';
 import Hero from './components/Hero.jsx';
 import About from './components/About.jsx';
@@ -12,18 +12,21 @@ import Contact from './components/Contact.jsx';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import ThreeBackground from './components/ThreeBackground.jsx';
-import TypewriterEffect from './components/TypewriterEffect.jsx'; // Import the new component
+import TypewriterEffect from './components/TypewriterEffect.jsx';
 
 function App() {
-  const [showTypewriter, setShowTypewriter] = useState(true);
-  const [showPortfolio, setShowPortfolio] = useState(false);
+  const [showTypewriterOverlay, setShowTypewriterOverlay] = useState(true);
+  const [fadingOut, setFadingOut] = useState(false);
+  const FADE_OUT_DURATION = 1000; // 1 second for the fade out animation
 
   const handleTypewriterComplete = () => {
-    // Once typewriter is complete, wait a small moment, then fade in portfolio
+    // Start the fade-out animation
+    setFadingOut(true);
+
+    // After the fade-out duration, unmount the typewriter overlay
     setTimeout(() => {
-      setShowTypewriter(false); // Hide the typewriter effect
-      setShowPortfolio(true);   // Show the main portfolio content
-    }, 1000); // Wait 1 second after typing finishes before transitioning
+      setShowTypewriterOverlay(false);
+    }, FADE_OUT_DURATION);
   };
 
   return (
@@ -33,22 +36,9 @@ function App() {
         <ThreeBackground />
       </div>
 
-      {/* Conditional Rendering for Typewriter Effect */}
-      {showTypewriter && (
-        <div className="absolute inset-0 z-20 flex items-center justify-center bg-primary-dark bg-opacity-90 transition-opacity duration-1000" // Added transition for fade out
-             style={{ opacity: showTypewriter ? 1 : 0 }}>
-          <TypewriterEffect
-            text="Welcome to My Portfolio"
-            delay={100} // Adjust typing speed here
-            onComplete={handleTypewriterComplete}
-          />
-        </div>
-      )}
-
       {/* Main content wrapper, sits on top of the Three.js background */}
-      {/* Conditionally render this only after the typewriter effect is done */}
-      {/* Added transition-opacity for a smooth fade-in */}
-      <div className={`relative z-10 bg-primary-dark bg-opacity-70 min-h-screen transition-opacity duration-1000 ${showPortfolio ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+      {/* This content is always rendered from the start */}
+      <div className="relative z-10 bg-primary-dark bg-opacity-70 min-h-screen">
         <Navbar />
 
         <main className="container mx-auto px-4 py-8">
@@ -86,8 +76,21 @@ function App() {
         </main>
 
         <Footer data={data} />
-        
       </div>
+
+      {/* Typewriter Overlay: Conditionally rendered and fades out */}
+      {showTypewriterOverlay && (
+        <div
+          className={`absolute inset-0 z-20 flex items-center justify-center bg-primary-dark bg-opacity-90 transition-opacity duration-1000 ${fadingOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+          // The pointer-events-none ensures you can click through it once it starts fading out
+        >
+          <TypewriterEffect
+            text="Welcome to My Portfolio"
+            delay={100} // Adjust typing speed here
+            onComplete={handleTypewriterComplete}
+          />
+        </div>
+      )}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 // src/App.js
-import React from 'react';
+import React, { useState, useEffect } from 'react'; // Import useState and useEffect
 import data from './data.jsx';
 import Hero from './components/Hero.jsx';
 import About from './components/About.jsx';
@@ -11,20 +11,44 @@ import HonorsAndAwards from './components/HonorsAndAwards.jsx';
 import Contact from './components/Contact.jsx';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
-import ThreeBackground from './components/ThreeBackground.jsx'; // Ensure this path is correct
+import ThreeBackground from './components/ThreeBackground.jsx';
+import TypewriterEffect from './components/TypewriterEffect.jsx'; // Import the new component
 
 function App() {
+  const [showTypewriter, setShowTypewriter] = useState(true);
+  const [showPortfolio, setShowPortfolio] = useState(false);
+
+  const handleTypewriterComplete = () => {
+    // Once typewriter is complete, wait a small moment, then fade in portfolio
+    setTimeout(() => {
+      setShowTypewriter(false); // Hide the typewriter effect
+      setShowPortfolio(true);   // Show the main portfolio content
+    }, 1000); // Wait 1 second after typing finishes before transitioning
+  };
+
   return (
     <div className="relative min-h-screen">
       {/* Fixed Three.js Background covering the entire page, below all content */}
-      {/* *** IMPORTANT CHANGE: Applying the custom CSS class directly *** */}
       <div className="full-screen-background-container">
         <ThreeBackground />
       </div>
 
+      {/* Conditional Rendering for Typewriter Effect */}
+      {showTypewriter && (
+        <div className="absolute inset-0 z-20 flex items-center justify-center bg-primary-dark bg-opacity-90 transition-opacity duration-1000" // Added transition for fade out
+             style={{ opacity: showTypewriter ? 1 : 0 }}>
+          <TypewriterEffect
+            text="Welcome to My Portfolio"
+            delay={100} // Adjust typing speed here
+            onComplete={handleTypewriterComplete}
+          />
+        </div>
+      )}
+
       {/* Main content wrapper, sits on top of the Three.js background */}
-      {/* Ensure bg-primary-dark is defined in your Tailwind config if it's not a default color */}
-      <div className="relative z-10 bg-primary-dark bg-opacity-70 min-h-screen">
+      {/* Conditionally render this only after the typewriter effect is done */}
+      {/* Added transition-opacity for a smooth fade-in */}
+      <div className={`relative z-10 bg-primary-dark bg-opacity-70 min-h-screen transition-opacity duration-1000 ${showPortfolio ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
         <Navbar />
 
         <main className="container mx-auto px-4 py-8">

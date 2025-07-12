@@ -37,7 +37,6 @@ function App() {
       </div>
 
       {/* Main content wrapper, sits on top of the Three.js background */}
-      {/* This content is always rendered from the start */}
       <div className="relative z-10 bg-primary-dark bg-opacity-70 min-h-screen">
         <Navbar />
 
@@ -78,15 +77,15 @@ function App() {
         <Footer data={data} />
       </div>
 
-      {/* Typewriter Overlay: Conditionally rendered and fades out */}
+      {/* Typewriter Overlay: Now 'fixed' to the viewport */}
       {showTypewriterOverlay && (
         <div
-          className={`absolute inset-0 z-20 flex items-center justify-center bg-primary-dark bg-opacity-90 transition-opacity duration-1000 ${fadingOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
-          // The pointer-events-none ensures you can click through it once it starts fading out
+          // Changed 'absolute' to 'fixed' and increased z-index for assured top layer
+          className={`fixed inset-0 z-50 flex items-center justify-center bg-primary-dark bg-opacity-90 transition-opacity duration-1000 ${fadingOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
         >
           <TypewriterEffect
             text="Welcome to My Portfolio"
-            delay={100} // Adjust typing speed here
+            delay={100}
             onComplete={handleTypewriterComplete}
           />
         </div>

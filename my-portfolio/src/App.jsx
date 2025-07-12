@@ -27,7 +27,7 @@ function App() {
 
       {/* Main content wrapper, sits on top of the Three.js background */}
       {/* This content is fully visible and rendered from the start */}
-      <div className="relative z-10 bg-primary-dark bg-opacity-70 min-h-screen">
+      <div className="relative z-10 min-h-screen">
         <Navbar />
 
         <main className="container mx-auto px-4 py-8">

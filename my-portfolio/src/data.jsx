@@ -45,7 +45,7 @@ const data = {
       institution: "Indian Institute of Technology, Hyderabad",
       degree: "B.Tech CSE",
       dates: "July 2024 - July 2028",
-      grade: "9.71 (Highest GPA of 9.88 in 1st sem)",
+      grade: "9.71",
       activities: "Participated in Tech-clubs in Sci-Tech Council of IITH like Lambda - Software Development Club and Epoch - AI ML and Data Science club",
       award: "Awarded with the prestigious Academic Excellence Award on 2 April, 2025 for my highest GPA of 9.88 among all the CSE'28 batch in the 1st semester."
     },

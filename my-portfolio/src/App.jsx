@@ -35,7 +35,7 @@ function App() {
           {/* TypewriterEffect remains in its section */}
           <div className="py-16 md:py-24 flex justify-center items-center">
             <TypewriterEffect
-              text="Welcome to My Portfolio.....Made with ❤️ by P.Vidya Praveen"
+              text="Welcome to My Portfolio....."
               delay={100}
               loop={true}
               loopDelay={3000}

@@ -10,21 +10,21 @@ const data = {
   email: "vidyapraveen.2006@gmail.com",
   github: "https://github.com/PathriVidyaPraveen",
   linkedin: "https://www.linkedin.com/in/pathri-vidya-praveen-9834b531a",
-  codeforces: "https://codeforces.com/profile/Pathri_Vidya_Praveen",
+  codeforces: "https://codeforces.com/profile/praveen.ipynb",
   codechef: "https://www.codechef.com/users/praveen_0_6",
   leetcode: "https://leetcode.com/u/Pathri_Vidya_Praveen/",
 
   about: {
-    summary: "I'm a 2nd-year B.Tech student in Computer Science and Engineering at IIT Hyderabad, driven by a deep curiosity for how things work—both mathematically and at the systems level. I'm passionate about exploring and building in the areas of Mathematics, Artificial Intelligence, Systems Programming, and Software Development.",
-    detailed: "I love working on hands-on projects that push my understanding and allow me to apply theoretical concepts to real-world problems—especially those that can make life easier and more efficient for people. My core interests lie in the mathematical aspects of AI, Computer Vision and the low-level workings of computers like operating systems and hardware acceleration. Always eager to learn, build, and collaborate."
+    summary: "I am passionate in Mathematics , Artificial Intelligence ,Quantum Computing and Theoretical Computer Science. I love to explore different interdisciplinary fields like AI and Computing in Physics and Biology.",
+    detailed: "I love working on different research problems and read various research papers. I am currently researching on Robust and Explainable Deepfake detection using GAN ensemble,Vision Transformers and Biological Signal Processing. Always eager to learn, build, and collaborate."
   },
 
   topSkills: [
-    "C",
+    "C++",
     "Python",
     "Mathematics",
-    "Full Stack Development",
-    "Artificial Intelligence"
+    "Theoretical Computer Science",
+    "Artificial Intelligence - Computer Vision and Natural Language Processing"
   ],
 
   skills: [
@@ -45,8 +45,8 @@ const data = {
       institution: "Indian Institute of Technology, Hyderabad",
       degree: "B.Tech CSE",
       dates: "July 2024 - July 2028",
-      grade: "9.71",
-      activities: "Participated in Tech-clubs in Sci-Tech Council of IITH like Lambda - Software Development Club and Epoch - AI ML and Data Science club",
+      grade: "9.32",
+      activities: "Working as a core member at Epoch - the AI ML and Data Science Club of IIT Hyderabad. Worked as Teaching Assistant for Introduction to Programming course. Currently a Teaching Assistant for Probability and Random Variables course.",
       award: "Awarded with the prestigious Academic Excellence Award on 2 April, 2025 for my highest GPA of 9.88 among all the CSE'28 batch in the 1st semester."
     },
     {
